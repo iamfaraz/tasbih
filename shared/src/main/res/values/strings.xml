@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tasbih</string>
+    <string name="subhan_allah" translatable="false">سُبْحَانَ اللّٰهِ</string>
+    <string name="alhamdulillah" translatable="false">الْحَمْدُ لِلّٰهِ</string>
+    <string name="allahu_akbar" translatable="false">اللّٰهُ أَكْبَرُ</string>
+    <string name="la_ilaha" translatable="false">لَا إِلٰهَ إِلَّا اللّٰهُ</string>
+    <string name="astaghfirullah" translatable="false">أَسْتَغْفِرُ اللّٰهَ</string>
+    <string name="salawat" translatable="false">اللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ</string>
+    <string name="wa_bihamdihi" translatable="false">سُبْحَانَ اللّٰهِ وَبِحَمْدِهِ</string>
+    <string name="al_azim" translatable="false">سُبْحَانَ اللّٰهِ الْعَظِيمِ</string>
+    <string name="la_hawla" translatable="false">لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰهِ</string>
+    <string name="hasbunallah" translatable="false">حَسْبُنَا اللّٰهُ وَنِعْمَ الْوَكِيلُ</string>
+    <string name="wa_bihamdihi_latin" translatable="false">Subhan Allahi wa bihamdihi</string>
+    <string name="al_azim_latin" translatable="false">Subhan Allahil Azim</string>
+    <string name="la_hawla_latin" translatable="false">La hawla wa la quwwata illa billah</string>
+    <string name="hasbunallah_latin" translatable="false">Hasbunallahu wa nimal wakil</string>
+    <string name="wa_bihamdihi_meaning">Glory and praise be to Allah</string>
+    <string name="al_azim_meaning">Glory be to Allah, the Magnificent</string>
+    <string name="la_hawla_meaning">There is no power or strength except with Allah</string>
+    <string name="hasbunallah_meaning">Allah is sufficient for us, and He is the best guardian</string>
+    <string name="subhan_allah_latin" translatable="false">Subhan Allah</string>
+    <string name="alhamdulillah_latin" translatable="false">Alhamdulillah</string>
+    <string name="allahu_akbar_latin" translatable="false">Allahu Akbar</string>
+    <string name="la_ilaha_latin" translatable="false">La ilaha illa Allah</string>
+    <string name="astaghfirullah_latin" translatable="false">Astaghfirullah</string>
+    <string name="salawat_latin" translatable="false">Allahumma salli ala Muhammad</string>
+    <string name="subhan_allah_meaning">Glory be to Allah</string>
+    <string name="alhamdulillah_meaning">All praise is due to Allah</string>
+    <string name="allahu_akbar_meaning">Allah is the Greatest</string>
+    <string name="la_ilaha_meaning">There is no god but Allah</string>
+    <string name="astaghfirullah_meaning">I seek forgiveness from Allah</string>
+    <string name="salawat_meaning">O Allah, send blessings upon Muhammad</string>
+    <string name="all_time">All time: %1$d</string>
+    <string name="undo">Undo</string>
+    <string name="settings">Settings</string>
+    <string name="vibrate_every">Vibrate every</string>
+    <string name="vibrate_off">Off</string>
+    <string name="vibrate_interval">%1$d counts</string>
+    <string name="after_prayer_mode">After-prayer 33/33/34</string>
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="prayer_times">Prayer times</string>
+    <string name="prayer_fajr">Fajr</string>
+    <string name="prayer_sunrise">Sunrise</string>
+    <string name="prayer_dhuhr">Dhuhr</string>
+    <string name="prayer_asr">Asr</string>
+    <string name="prayer_maghrib">Maghrib</string>
+    <string name="prayer_isha">Isha</string>
+    <string name="prayer_tahajjud">Tahajjud</string>
+    <string name="school">School of thought</string>
+    <string name="school_hanafi">Hanafi</string>
+    <string name="school_shafii">Shafi\'i</string>
+    <string name="school_maliki">Maliki</string>
+    <string name="school_hanbali">Hanbali</string>
+    <string name="school_note">Hanafi: Asr at twice the shadow length, Isha after the white twilight. Others: Asr at the shadow length, Isha after the red twilight. Tahajjud starts at the last third of the night for all schools.</string>
+    <string name="calculation_method">Calculation method</string>
+    <string name="method_karachi">Karachi</string>
+    <string name="method_mwl">Muslim World League</string>
+    <string name="method_isna">ISNA</string>
+    <string name="method_egypt">Egypt</string>
+    <string name="method_umm_al_qura">Umm al-Qura</string>
+    <string name="method_dubai">Dubai</string>
+    <string name="prayer_disclaimer">Times are calculated and can differ from your local mosque by a few minutes. Check them against a local timetable.</string>
+    <string name="update_location">Update location</string>
+    <string name="location_waiting">Finding your location…</string>
+    <string name="location_failed">Couldn\'t get your location. Allow location access and turn location on, then try again.</string>
+    <string name="location_stale">Couldn\'t update your location, so these times use the last one found.</string>
+    <string name="open_on_phone">Open Prayer times on your phone first</string>
+    <string name="prayer_alerts">Alerts</string>
+    <string name="prayer_time_now">It\'s time for %1$s</string>
+    <string name="have_you_prayed">Have you prayed %1$s?</string>
+    <string name="prayer_ends_at">%1$s time ends at %2$s</string>
+    <string name="yes_prayed">Yes, I prayed</string>
+    <string name="not_yet">Not yet</string>
+    <string name="channel_prayer_time">Prayer time</string>
+    <string name="channel_reminder">Prayer reminder</string>
+    <string name="alert_at_prayer_time">Alert at prayer time</string>
+    <string name="reminder_off">Reminder: off</string>
+    <string name="reminder_minutes">Ask %1$d min before it ends</string>
+    <string name="notification_sound">System sounds</string>
+    <string name="built_in_sound">Use built-in chime</string>
+    <string name="test_alert">Test alert</string>
+    <string name="tab_tasbih">Tasbih</string>
+    <string name="tab_prayer">Prayer</string>
+    <string name="next_prayer_in">%1$s in</string>
+    <string name="of_round">of %1$d</string>
+    <string name="location">Location</string>
+    <string name="location_not_set">Not set yet</string>
+    <string name="location_current">Your location</string>
+    <string name="sound_built_in">Sound: built-in chime</string>
+    <string name="sound_custom">Sound: your choice</string>
+    <string name="sound_named">Sound: %1$s</string>
+    <string name="sound_from_file">From files</string>
+    <string name="sound_failed">Couldn\'t use that file. Try another audio file.</string>
+    <string name="counting">Counting</string>
+    <string name="prayers">Prayers</string>
+    <string name="after_prayer_note">Subhan Allah 33, Alhamdulillah 33, Allahu Akbar 34</string>
+    <string name="keep_screen_on_note">Stops the screen sleeping while you count</string>
+    <string name="hijri_adjustment">Adjust the date</string>
+    <string name="hijri_days">%1$+d days</string>
+    <string name="hijri_automatic">Use default for my region</string>
+    <string name="hijri_note">Based on the Umm al-Qura calendar, moved to suit your region. Moon sighting varies, so adjust it to match local announcements. The date changes at Maghrib.</string>
+    <string name="use_current_location">Use my current location</string>
+    <string name="location_is_automatic">Updates automatically</string>
+    <string name="location_is_manual">Chosen by you</string>
+    <string name="search_city">Search for a city</string>
+    <string name="search">Search</string>
+    <string name="no_places_found">No places found. Check the spelling and your connection.</string>
+    <string name="ring">Zikr ring</string>
+    <string name="ring_channel">Zikr ring connection</string>
+    <string name="ring_not_paired">Not paired</string>
+    <string name="ring_connected">Connected</string>
+    <string name="ring_connected_battery">Connected, battery %1$d of 4</string>
+    <string name="ring_charging">Charging, battery %1$d of 4</string>
+    <string name="ring_full">Fully charged</string>
+    <string name="ring_low">Low battery, %1$d of 4</string>
+    <string name="ring_searching">Looking for your ring</string>
+    <string name="ring_note">Each press counts for the current dhikr and syncs to your watch. The number on the ring itself only counts its own presses.</string>
+    <string name="ring_forget">Forget this ring</string>
+    <string name="ring_permission">Allow nearby devices so Tasbih can find your ring.</string>
+    <string name="ring_allow">Allow</string>
+    <string name="ring_scanning">Press your ring to wake it, then pick it below.</string>
+    <string name="custom_dhikr">Custom dhikr</string>
+    <string name="sequence_title">Subhan Allah ×33, Alhamdulillah ×33, Allahu Akbar ×34</string>
+    <string name="sequence_note">Default. Carries on with another round after 100</string>
+    <string name="choose_dhikr">Choose dhikr</string>
+    <string name="change_dhikr">Change</string>
+    <string name="your_dhikr">Your dhikr</string>
+    <string name="add_dhikr">Add</string>
+    <string name="new_dhikr">New dhikr</string>
+    <string name="remove">Remove</string>
+    <string name="countdown_setting">Prayer time left</string>
+    <string name="countdown_setting_note">Keeps a notification showing when the current prayer started and how long is left</string>
+    <string name="channel_countdown">Prayer time left</string>
+    <string name="countdown_title">%1$s time</string>
+    <string name="countdown_title_next">Next: %1$s</string>
+    <string name="countdown_summary">%1$s left · ends %2$s</string>
+    <string name="countdown_details">Started: %1$s\nTime left: %2$s\nEnds: %3$s</string>
+    <string name="countdown_details_next">Sunrise: %1$s\nStarts in: %2$s\nStarts: %3$s</string>
+    <string name="live_left">%1$s left</string>
+    <string name="live_next">%1$s in %2$s</string>
+    <string name="live_route">%1$s · %2$s → %3$s</string>
+    <string name="live_route_next">Sunrise %1$s → %2$s %3$s</string>
+    <string name="mark_prayed">Mark as prayed</string>
+    <string name="channel_group">Tasbih</string>
+    <string name="watch_alerts_setting">Prayer alerts on watch</string>
+    <string name="watch_alerts_note">Alerts on your watch at each prayer time, even away from your phone. Only while you\'re wearing it, so it stays quiet on the charger</string>
+    <string name="ring_line_connected">Ring connected</string>
+    <string name="ring_line_searching">Finding ring</string>
+    <string name="complication_label">Tasbih count</string>
+    <string name="complication_description">%1$s, count %2$d</string>
+    <string name="tile_label">Tasbih</string>
+    <string name="tile_description">Your current dhikr and count</string>
+    <string name="reset">Reset</string>
+    <string name="reset_question">Reset count?</string>
+    <string name="cancel">Cancel</string>
+    <string name="count_description">Count %1$d. Tap to add one.</string>
+</resources>
