@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.IntentCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.tasbih.counter.mobile.ring.RingDialog
+import app.tasbih.counter.mobile.update.UpdateCard
 import app.tasbih.counter.mobile.ring.RingStore
 import app.tasbih.counter.mobile.ring.ringStatusText
 import app.tasbih.counter.shared.Prayer
@@ -186,6 +187,8 @@ fun SettingsScreen(settings: TasbihSettings, store: PrayerStore, location: Locat
                 stringResource(SharedR.string.keep_screen_on_note),
                 values.keepScreenOn,
             ) { on -> settings.update { it.copy(keepScreenOn = on) } }
+
+            UpdateCard()
         }
     }
 }

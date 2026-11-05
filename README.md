@@ -100,6 +100,15 @@ Installing over a build signed with a different key fails. Uninstall that build 
 3. To use a ring, go to **Settings > Zikr ring**, press the ring to wake it, and pick it from the list.
 4. For reliable alerts, go to **Settings > Apps > Tasbih > Battery** on the phone and choose **Unrestricted**.
 
+## Updates
+
+Tasbih checks this repository's releases at most once a day when you open it, and you can tap **Check now** in Settings. Automatic checks can be turned off there. This is the app's only internet use, and GitHub sees your IP address when it happens.
+
+- **Phone:** tap **Update phone** and confirm Android's prompt. The first time, you'll need to allow Tasbih to install apps.
+- **Watch:** tap **Update watch**. The phone sends the update over the watch connection, which can take a few minutes. Then tap the notification on the watch and confirm.
+
+Before installing, both devices check that the update is signed with the same key as the installed app, and Android enforces this too. Updates can't be silent, because Android requires your confirmation outside the Play Store. The updater can only update release builds, not debug ones.
+
 ## Build from source
 
 You need Android Studio or JDK 21, and the Android SDK with platform 36.

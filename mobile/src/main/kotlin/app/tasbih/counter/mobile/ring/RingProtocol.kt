@@ -1,5 +1,6 @@
 package app.tasbih.counter.mobile.ring
 
+import app.tasbih.counter.shared.MAX_RING_COUNT
 import app.tasbih.counter.shared.RingCharge
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -8,6 +9,8 @@ import java.util.Locale
 /**
  * The Zikr ring's plain-text protocol. Commands are `P<NN>,<timestamp>[,field...]`
  * and replies are `Q<NN>,...`. Only commands proven against a real ring are here.
+ *
+ * The link is unencrypted, so location is rounded to about 1 km, which is plenty for prayer times.
  */
 object RingCommands {
     private fun timestamp() = SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.US).format(Date())
@@ -19,7 +22,7 @@ object RingCommands {
     fun syncTime(is24Hour: Boolean, timeZoneHours: Double, latitude: Double, longitude: Double): String =
         String.format(
             Locale.US,
-            "P01,%s,%s,1,%s,%.5f,%.5f",
+            "P01,%s,%s,1,%s,%.2f,%.2f",
             timestamp(),
             if (is24Hour) "0" else "1",
             timeZoneHours,
@@ -34,7 +37,7 @@ object RingCommands {
     fun prayerSetup(hanafi: Boolean, timeZoneHours: Double, latitude: Double, longitude: Double): String =
         String.format(
             Locale.US,
-            "P09,%s,1,21,%d,%.5f,%.5f,%s",
+            "P09,%s,1,21,%d,%.2f,%.2f,%s",
             timestamp(),
             if (hanafi) 1 else 0,
             latitude,
@@ -71,9 +74,10 @@ sealed interface RingMessage {
 fun parseRingMessage(text: String): RingMessage {
     val fields = text.trim().split(",")
     fun number(index: Int) = fields.getOrNull(index)?.trim()?.toIntOrNull()
+    fun count(index: Int) = number(index)?.takeIf { it in 0..MAX_RING_COUNT }?.let(RingMessage::Count)
     return when (fields[0]) {
-        "Q07" -> number(1)?.let(RingMessage::Count)
-        "Q12" -> number(2)?.let(RingMessage::Count)
+        "Q07" -> count(1)
+        "Q12" -> count(2)
         "Q02" -> number(2)?.let { RingMessage.Battery(it, RingCharge.fromCode(number(1))) }
         else -> null
     } ?: RingMessage.Other

@@ -9,6 +9,7 @@ import android.app.Service
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.Build
@@ -48,6 +49,7 @@ class RingService : Service(), RingGattClient.Listener {
     private var client: RingGattClient? = null
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
+    private val debuggable by lazy { applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0 }
     private var ringCount: Long? = null
 
     /** While testing the protocol, the ring's totals are tracked but never added to a tasbih. */
@@ -71,17 +73,21 @@ class RingService : Service(), RingGattClient.Listener {
             followDhikrChoice()
             keepPrayerSettingsCurrent()
         }
-        if (intent?.hasExtra(EXTRA_TEST_MODE) == true) testMode = intent.getBooleanExtra(EXTRA_TEST_MODE, false)
-        val gapMs = intent?.getIntExtra(EXTRA_GAP, 800)?.toLong() ?: 800L
-        intent?.getStringExtra(EXTRA_RAW)?.let { raw ->
+        if (debuggable && intent != null) handleDebugCommand(intent)
+        return START_STICKY
+    }
+
+    private fun handleDebugCommand(intent: Intent) {
+        if (intent.hasExtra(EXTRA_TEST_MODE)) testMode = intent.getBooleanExtra(EXTRA_TEST_MODE, false)
+        val gapMs = intent.getIntExtra(EXTRA_GAP, 800).toLong()
+        intent.getStringExtra(EXTRA_RAW)?.let { raw ->
             Log.i(TAG, "TX $raw")
             client?.send(raw, gapMs)
         }
-        intent?.getStringExtra(EXTRA_HEX)?.let { hex ->
+        intent.getStringExtra(EXTRA_HEX)?.let { hex ->
             Log.i(TAG, "TX ${hex.length / 2} bytes")
             client?.sendBytes(hex.chunked(2).map { it.toInt(16).toByte() }.toByteArray())
         }
-        return START_STICKY
     }
 
     override fun onDestroy() {
@@ -127,7 +133,7 @@ class RingService : Service(), RingGattClient.Listener {
     }
 
     override fun onMessage(text: String) {
-        Log.i(TAG, "RX $text")
+        if (debuggable) Log.i(TAG, "RX $text")
         when (val message = parseRingMessage(text)) {
             is RingMessage.Count -> {
                 ringCount = message.count.toLong()

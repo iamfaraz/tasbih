@@ -1,5 +1,8 @@
 package app.tasbih.counter.shared
 
+/** Far above any real session. The ring has no authentication, so its numbers can't be trusted. */
+const val MAX_RING_COUNT = 99_999L
+
 /** The counters and current tasbih after a change, and whether it reached a milestone. */
 data class CountStep(val states: Map<Tasbih, TasbihState>, val settings: Settings, val reached: Boolean)
 
@@ -30,14 +33,15 @@ fun countOne(states: Map<Tasbih, TasbihState>, settings: Settings, deviceId: Str
  * A finished sequence reads as all zeros, ready for the next round.
  */
 fun syncToRing(states: Map<Tasbih, TasbihState>, settings: Settings, ringCount: Long, deviceId: String): CountStep {
+    val count = ringCount.coerceIn(0, MAX_RING_COUNT)
     if (!settings.afterPrayerMode) {
         val current = settings.selected
-        val synced = states + (current to states.getValue(current).withTotal(ringCount, deviceId))
+        val synced = states + (current to states.getValue(current).withTotal(count, deviceId))
         return CountStep(synced, settings, reached = false)
     }
     val sequence = Tasbih.entries.filter { it.afterPrayerTarget != null }
-    var remaining = ringCount % sequence.sumOf { it.afterPrayerTarget ?: 0L }
-    if (ringCount > 0 && remaining == 0L) {
+    var remaining = count % sequence.sumOf { it.afterPrayerTarget ?: 0L }
+    if (count > 0 && remaining == 0L) {
         // Already cleared, so a repeat of this number mustn't count the round again.
         if (sequence.all { states.getValue(it).total == 0L }) {
             return CountStep(states, settings.copy(selected = sequence.first()), reached = false)

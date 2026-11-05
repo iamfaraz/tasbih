@@ -10,7 +10,6 @@ import android.view.HapticFeedbackConstants
 import android.view.InputDevice
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.focusable
@@ -69,19 +68,19 @@ private fun isDetented(context: Context, inputDeviceId: Int): Boolean =
     context.packageManager.hasSystemFeature(FEATURE_DETENTED_ROTARY) ||
         InputDevice.getDevice(inputDeviceId)?.name?.contains("detent", ignoreCase = true) == true
 
+private const val NOTIFICATION_REQUEST = 1
+
 /** How far a smooth crown turns for one count. */
 private val CROWN_DISTANCE_PER_COUNT = 40.dp
 
 class MainActivity : ComponentActivity() {
-    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
-
     /** Asked here because the setting is switched on from the phone. */
     override fun onResume() {
         super.onResume()
         val config = (application as TasbihApplication).prayerStore.config.value
         val granted = checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
         if (config.watchAlerts && !granted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), NOTIFICATION_REQUEST)
         }
         WatchPrayerAlerts.schedule(this)
     }

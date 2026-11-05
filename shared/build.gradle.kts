@@ -23,8 +23,8 @@ dependencies {
     api(libs.kotlinx.coroutines.android)
     implementation(platform(libs.compose.bom))
     api(libs.compose.foundation)
-    implementation(libs.kotlinx.coroutines.play.services)
-    implementation(libs.play.services.wearable)
+    api(libs.kotlinx.coroutines.play.services)
+    api(libs.play.services.wearable)
     implementation(libs.adhan)
 
     testImplementation(libs.junit)

@@ -34,11 +34,22 @@ data class TasbihState(
 
     fun reset(): TasbihState = copy(baselines = counts)
 
-    /** Moves [total] to [target], keeping all-time totals. */
-    fun withTotal(target: Long, deviceId: String): TasbihState = when {
-        target > total -> increment(deviceId, target - total)
-        target == 0L -> reset()
-        else -> generateSequence(this) { it.undo(deviceId) }.first { it.total <= target }
+    /**
+     * Moves [total] to [target], keeping all-time totals. It works directly on each device's
+     * tally, as [target] can come from the ring and mustn't decide how long this takes.
+     */
+    fun withTotal(target: Long, deviceId: String): TasbihState {
+        val wanted = target.coerceAtLeast(0)
+        if (wanted >= total) return increment(deviceId, wanted - total)
+        var toRemove = total - wanted
+        val raised = baselines.toMutableMap()
+        for ((device, count) in counts) {
+            val baseline = raised[device] ?: 0L
+            val taken = minOf(toRemove, count - baseline)
+            if (taken > 0) raised[device] = baseline + taken
+            toRemove -= taken
+        }
+        return copy(baselines = raised)
     }
 
     /**

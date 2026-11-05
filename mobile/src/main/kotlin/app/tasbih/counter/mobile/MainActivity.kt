@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.tasbih.counter.mobile.ring.RingService
+import app.tasbih.counter.mobile.update.AppUpdater
 import app.tasbih.counter.shared.TasbihApplication
 import app.tasbih.counter.shared.toEnumOr
 import app.tasbih.counter.shared.R as SharedR
@@ -77,6 +78,7 @@ private fun TasbihApp(app: TasbihApplication, startTab: Tab) {
     LaunchedEffect(Unit) {
         location.refresh()
         RingService.start(context)
+        AppUpdater.checkIfDue(context)
     }
     LaunchedEffect(config, prayed) {
         PrayerScheduler.schedule(context)

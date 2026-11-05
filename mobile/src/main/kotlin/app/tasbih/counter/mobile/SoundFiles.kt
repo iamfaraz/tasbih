@@ -22,8 +22,12 @@ data class ChosenSound(val uri: Uri, val name: String)
 @RequiresApi(Build.VERSION_CODES.Q)
 suspend fun importSound(context: Context, source: Uri): ChosenSound? = withContext(Dispatchers.IO) {
     val resolver = context.contentResolver
-    val fileName = resolver.query(source, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
-        if (cursor.moveToFirst()) cursor.getString(0) else null
+    val fileName = try {
+        resolver.query(source, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) cursor.getString(0) else null
+        }
+    } catch (e: RuntimeException) {
+        null
     } ?: "Tasbih sound"
     val details = ContentValues().apply {
         put(MediaStore.Audio.Media.DISPLAY_NAME, fileName)
@@ -33,21 +37,24 @@ suspend fun importSound(context: Context, source: Uri): ChosenSound? = withConte
         put(MediaStore.Audio.Media.IS_PENDING, 1)
     }
     val target = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
-    val copy = resolver.insert(target, details) ?: return@withContext null
+    var copy: Uri? = null
     try {
+        val created = resolver.insert(target, details) ?: return@withContext null
+        copy = created
         resolver.openInputStream(source).use { input ->
-            resolver.openOutputStream(copy).use { output ->
+            resolver.openOutputStream(created).use { output ->
                 if (input == null || output == null) throw IOException("Couldn't open the sound")
                 input.copyTo(output)
             }
         }
-        resolver.update(copy, ContentValues().apply { put(MediaStore.Audio.Media.IS_PENDING, 0) }, null, null)
-        ChosenSound(copy, fileName.substringBeforeLast('.'))
+        resolver.update(created, ContentValues().apply { put(MediaStore.Audio.Media.IS_PENDING, 0) }, null, null)
+        ChosenSound(created, fileName.substringBeforeLast('.'))
     } catch (e: IOException) {
-        resolver.delete(copy, null, null)
+        copy?.let { resolver.delete(it, null, null) }
         null
-    } catch (e: SecurityException) {
-        resolver.delete(copy, null, null)
+    } catch (e: RuntimeException) {
+        // Includes files whose type the media library refuses.
+        copy?.let { resolver.delete(it, null, null) }
         null
     }
 }

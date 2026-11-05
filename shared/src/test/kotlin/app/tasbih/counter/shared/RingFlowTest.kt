@@ -205,6 +205,34 @@ class RingFlowTest {
         assertEquals(before, states)
     }
 
+    @Test(timeout = 2000)
+    fun `a negative ring number can't hang the app`() {
+        ring(10)
+        ring(-1)
+
+        assertTotals(0, 0, 0)
+    }
+
+    @Test(timeout = 2000)
+    fun `a huge ring number can't hang the app`() {
+        settings = Settings(afterPrayerMode = false, selected = Tasbih.SALAWAT)
+        ring(2_000_000_000)
+        assertEquals(MAX_RING_COUNT, states.getValue(Tasbih.SALAWAT).total)
+
+        ring(1)
+        assertEquals(1, states.getValue(Tasbih.SALAWAT).total)
+    }
+
+    @Test
+    fun `lowering a total spreads across devices and keeps all time`() {
+        val shared = TasbihState().increment("a", 5).increment("b", 5)
+        val lowered = shared.withTotal(3, "a")
+
+        assertEquals(3, lowered.total)
+        assertEquals(10, lowered.allTime)
+        assertEquals(lowered, TasbihState.decode(lowered.encode()))
+    }
+
     @Test
     fun `dhikr outside the sequence are left alone`() {
         states = states + (Tasbih.SALAWAT to TasbihState().increment(ring, 5))
