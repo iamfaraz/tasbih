@@ -167,6 +167,14 @@ The workflow needs these repository secrets:
 - **Marking a prayer** applies to today's list, so last night's Isha can only be marked from the notification before dawn.
 - **Samsung's Now Bar** draws Live Updates in its own way, so the notification may look different on other phones.
 
+## License
+
+Tasbih is source-available under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+
+You can read, use, change and share it for any non-commercial purpose, including personal use, study and use by charities and educational institutions. Commercial use isn't allowed. Because of that limit, this isn't open source in the formal sense.
+
+Copyright 2026 Faraz Ahmad
+
 ## Credits
 
 - Prayer times use [adhan-java](https://github.com/batoulapps/adhan-java) by Batoul Apps.
